@@ -75,6 +75,13 @@ public:
 		Beep(1568, 50);
 	}
 
+	void PlayStarSound()
+	{
+		Beep(1200, 100);
+		Beep(1400, 100);
+		Beep(1600, 400);
+	}
+
 	void PlayMoneySound()
 	{
 		if (!m_SoundOn)

@@ -9,6 +9,7 @@
 #include "Key.h"
 #include "Door.h"
 #include "Money.h"
+#include "Star.h"
 #include "Goal.h"
 #include "AudioManager.h"
 #include "Utility.h"
@@ -174,6 +175,15 @@ void GameplayState::HandleCollision(int newPlayerX, int newPlayerY)
 			collidedMoney->Remove();
 			m_player.AddMoney(collidedMoney->GetWorth());
 			m_player.SetPosition(newPlayerX, newPlayerY);
+			break;
+		}
+		case ActorType::Star:
+		{
+			Star* collidedStar = dynamic_cast<Star*>(collidedActor);
+			assert(collidedStar);
+			collidedStar->Remove();
+			m_player.SetPosition(newPlayerX, newPlayerY);
+			AudioManager::GetInstance()->PlayStarSound();
 			break;
 		}
 		case ActorType::Key:
