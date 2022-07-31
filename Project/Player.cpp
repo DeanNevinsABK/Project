@@ -13,6 +13,7 @@ Player::Player(ActorColor color)
 	, m_pCurrentKey(nullptr)
 	, m_money(0)
 	, m_lives(kStartingNumberOfLives)
+	, m_hasStar(false)
 {
 
 }
@@ -49,6 +50,18 @@ void Player::DropKey()
 		m_pCurrentKey->Place(m_pPosition->x, m_pPosition->y);
 		m_pCurrentKey = nullptr;
 	}
+}
+
+void Player::PickupStar()
+{
+	m_hasStar = true;
+	m_color = ActorColor::Gold;
+}
+
+void Player::LoseStar()
+{
+	m_hasStar = false;
+	m_color = ActorColor::Regular;
 }
 
 void Player::Draw()

@@ -158,12 +158,19 @@ void GameplayState::HandleCollision(int newPlayerX, int newPlayerY)
 			collidedEnemy->Remove();
 			m_player.SetPosition(newPlayerX, newPlayerY);
 
-			m_player.DecrementLives();
-			if (m_player.GetLives() < 0)
+			if (m_player.HasStar())
 			{
-				//TODO: Go to game over screen
-				AudioManager::GetInstance()->PlayLoseSound();
-				m_pOwner->LoadScene(StateMachineExampleGame::SceneName::Lose);
+				m_player.LoseStar();
+			}
+			else
+			{
+				m_player.DecrementLives();
+				if (m_player.GetLives() < 0)
+				{
+					//TODO: Go to game over screen
+					AudioManager::GetInstance()->PlayLoseSound();
+					m_pOwner->LoadScene(StateMachineExampleGame::SceneName::Lose);
+				}
 			}
 			break;
 		}
@@ -181,9 +188,13 @@ void GameplayState::HandleCollision(int newPlayerX, int newPlayerY)
 		{
 			Star* collidedStar = dynamic_cast<Star*>(collidedActor);
 			assert(collidedStar);
-			collidedStar->Remove();
-			m_player.SetPosition(newPlayerX, newPlayerY);
-			AudioManager::GetInstance()->PlayStarSound();
+			if (!m_player.HasStar())
+			{
+				collidedStar->Remove();
+				m_player.PickupStar();
+				m_player.SetPosition(newPlayerX, newPlayerY);
+				AudioManager::GetInstance()->PlayStarSound();
+			}			
 			break;
 		}
 		case ActorType::Key:

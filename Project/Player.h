@@ -18,6 +18,10 @@ public:
 	void AddMoney(int money) { m_money += money; }
 	int GetMoney() { return m_money; }
 
+	bool HasStar() { return m_hasStar; }
+	void PickupStar();
+	void LoseStar();
+
 	int GetLives() { return m_lives; }
 	void DecrementLives() { m_lives--; }
 
@@ -27,4 +31,5 @@ private:
 	Key* m_pCurrentKey;
 	int m_money;
 	int m_lives;
+	bool m_hasStar;
 };
