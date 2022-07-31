@@ -8,8 +8,8 @@ using namespace std;
 
 constexpr int kStartingNumberOfLives = 3;
 
-Player::Player()
-	: PlacableActor(0, 0)
+Player::Player(ActorColor color)
+	: PlacableActor(0, 0, color)
 	, m_pCurrentKey(nullptr)
 	, m_money(0)
 	, m_lives(kStartingNumberOfLives)
@@ -53,5 +53,9 @@ void Player::DropKey()
 
 void Player::Draw()
 {
-	cout << "@";
+	HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(console, (int)m_color);
+
+	std::cout << "@";
+	SetConsoleTextAttribute(console, (int)ActorColor::Regular);
 }

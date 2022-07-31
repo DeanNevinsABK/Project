@@ -6,7 +6,7 @@ class Key;
 class Player : public PlacableActor
 {
 public:
-	Player();
+	Player(ActorColor color = ActorColor::Regular);
 
 	bool HasKey();
 	bool HasKey(ActorColor color);
