@@ -9,6 +9,7 @@
 #include "Door.h"
 #include "Goal.h"
 #include "Money.h"
+#include "Star.h"
 
 using namespace std;
 
@@ -126,6 +127,10 @@ bool Level::ConvertLevel(int* playerX, int* playerY)
 			case '|':
 			case '-':
 				m_pLevelData[index] = WAL;
+				break;
+			case '*':
+				m_pLevelData[index] = ' ';
+				m_pActors.push_back(new Star(x, y, ActorColor::Gold));
 				break;
 			case 'r':
 				m_pLevelData[index] = ' ';
