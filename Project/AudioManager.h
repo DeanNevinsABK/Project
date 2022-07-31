@@ -39,6 +39,11 @@ public:
 		return m_SoundOn;
 	}
 
+	void PlayWallSound()
+	{
+		Beep(50, 75);
+	}
+
 	void PlayDoorClosedSound()
 	{
 		if (!m_SoundOn)
