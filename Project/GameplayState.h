@@ -33,7 +33,8 @@ public:
 	virtual void Draw() override;
 
 protected:
-	void ProcessInput();
+	void ProcessInput() override;
+	void CheckBeatLevel();
 
 private:
 	void HandleCollision(int newPlayerX, int newPlayerY);

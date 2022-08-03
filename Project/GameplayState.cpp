@@ -114,14 +114,8 @@ void GameplayState::ProcessInput()
 	}
 }
 
-//TODO: Refactor
-bool GameplayState::Update(bool processInput)
+void GameplayState::CheckBeatLevel()
 {
-	if (processInput && !m_didBeatLevel)
-	{
-		ProcessInput();
-	}
-	//TODO: Create a function that handles the below
 	if (m_didBeatLevel)
 	{
 		++m_skipFrameCount;
@@ -135,7 +129,7 @@ bool GameplayState::Update(bool processInput)
 				Utility::WriteHighScore(m_player.GetMoney());
 
 				AudioManager::GetInstance()->PlayWinSound();
-				
+
 				m_pOwner->LoadScene(StateMachineExampleGame::SceneName::Win);
 			}
 			else
@@ -143,9 +137,19 @@ bool GameplayState::Update(bool processInput)
 				// On to the next level
 				Load();
 			}
-
 		}
 	}
+}
+
+//TODO: Refactor
+bool GameplayState::Update(bool processInput)
+{
+	if (processInput && !m_didBeatLevel)
+	{
+		ProcessInput();
+	}
+	
+	CheckBeatLevel();
 
 	return false;
 }
