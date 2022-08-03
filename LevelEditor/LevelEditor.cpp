@@ -3,17 +3,9 @@
 #include <conio.h>
 #include <windows.h>
 #include <fstream>
+#include "Display.h"
 
 using namespace std;
-
-constexpr char kCursor = '_';
-
-constexpr char kTopRightBorder = (char)187;
-constexpr char kTopLeftBorder = (char)201;
-constexpr char kBottomRightBorder = (char)188;
-constexpr char kBottomLeftBorder = (char)200;
-constexpr char kHorizontalBorder = (char)205;
-constexpr char kVerticalBorder = (char)186;
 
 constexpr int kArrowInput = 224;
 constexpr int kLeftArrow = 75;
@@ -25,12 +17,6 @@ constexpr int kEscape = 27;
 constexpr int kBackspace = 8;
 
 void GetLevelDimensions(int& width, int& height);
-void DisplayLevel(char* pLevel, int width, int height, int cursorX, int cursorY);
-int GetIndexFromXY(int x, int y, int width);
-void DisplayTopBorder(int width);
-void DisplayBottomBorder(int width);
-void DisplayLeftBorder();
-void DisplayRightBorder();
 bool EditLevel(char* pLevel, int& cursorX, int& cursorY, int width, int height);
 void SaveLevel(char* pLevel, int width, int height);
 void DisplayLegend();
@@ -245,62 +231,4 @@ void GetLevelDimensions(int& width, int& height)
 
 	cout << "Enter the height of your level: ";
 	cin >> height;
-}
-
-void DisplayLevel(char* pLevel, int width, int height, int cursorX, int cursorY)
-{
-	DisplayTopBorder(width);
-
-	for (int y = 0; y < height; y++)
-	{
-		DisplayLeftBorder();
-		for (int x = 0; x < width; x++)
-		{
-			if (cursorX == x && cursorY == y)
-			{
-				cout << kCursor;
-			}
-			else
-			{
-				int index = GetIndexFromXY(x, y, width);
-				cout << pLevel[index];
-			}
-		}
-		DisplayRightBorder();
-	}
-
-	DisplayBottomBorder(width);
-}
-
-void DisplayTopBorder(int width)
-{
-	cout << kTopLeftBorder;
-	for (int i = 0; i < width; i++)
-	{
-		cout << kHorizontalBorder;
-	}
-	cout << kTopRightBorder << endl;
-}
-
-void DisplayBottomBorder(int width)
-{
-	cout << kBottomLeftBorder;
-	for (int i = 0; i < width; i++)
-	{
-		cout << kHorizontalBorder;
-	}
-	cout << kBottomRightBorder << endl;
-}
-void DisplayLeftBorder()
-{
-	cout << kVerticalBorder;
-}
-void DisplayRightBorder()
-{
-	cout << kVerticalBorder << endl;
-}
-
-int GetIndexFromXY(int x, int y, int width)
-{
-	return x + y * width;
 }
