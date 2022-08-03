@@ -210,6 +210,11 @@ void GameplayState::HandleCollision(int newPlayerX, int newPlayerY)
 			}
 			break;
 		}
+		// Currenlty, all doors can be opened without a key
+		// I am trying to find out what is allowing the doors
+		// to be opened. The m_pCurrentKey is showing as NULL 
+		// even though the collidedDoor->Open() function has been
+		// run but before the m_player.UseKey() has run.
 		case ActorType::Door:
 		{
 			Door* collidedDoor = dynamic_cast<Door*>(collidedActor);
