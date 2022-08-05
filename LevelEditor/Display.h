@@ -10,8 +10,10 @@ constexpr char kHorizontalBorder = (char)205;
 constexpr char kVerticalBorder = (char)186;
 
 int GetIndexFromXY(int x, int y, int width);
+void DisplayMenu();
 void DisplayTopBorder(int width);
 void DisplayBottomBorder(int width);
 void DisplayLeftBorder();
 void DisplayRightBorder();
 void DisplayLevel(char* pLevel, int width, int height, int cursorX, int cursorY);
+void DisplayLegend();
